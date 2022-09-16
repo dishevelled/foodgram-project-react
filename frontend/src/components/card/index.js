@@ -7,7 +7,7 @@ const Card = ({
   name = 'Без названия',
   id,
   image,
-  is_favorited,
+  is_favorite,
   is_in_shopping_cart,
   tags,
   cooking_time,
@@ -61,10 +61,10 @@ const Card = ({
           {authContext && <Button
             modifier='style_none'
             clickHandler={_ => {
-              handleLike({ id, toLike: Number(!is_favorited) })
+              handleLike({ id, toLike: Number(!is_favorite) })
             }}
           >
-            {is_favorited ? <Icons.StarActiveIcon /> : <Icons.StarIcon />}
+            {is_favorite ? <Icons.StarActiveIcon /> : <Icons.StarIcon />}
           </Button>}
       </div>
   </div>

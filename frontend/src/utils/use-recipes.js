@@ -13,7 +13,7 @@ export default function useRecipes () {
     method({ id }).then(res => {
       const recipesUpdated = recipes.map(recipe => {
         if (recipe.id === id) {
-          recipe.is_favorited = toLike
+          recipe.is_favorite = toLike
         }
         return recipe
       })

@@ -126,7 +126,7 @@ paths:
           description: Количество объектов на странице.
           schema:
             type: integer
-        - name: is_favorited
+        - name: is_favorite
           required: false
           in: query
           description: Показывать только рецепты, находящиеся в списке избранного.
@@ -813,7 +813,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IngredientInRecipe'
-        is_favorited:
+        is_favorite:
           type: boolean
           description: 'Находится ли в избранном'
         is_in_shopping_cart:
@@ -838,7 +838,7 @@ components:
       required:
         - tags
         - author
-        - is_favorited
+        - is_favorite
         - is_in_shopping_cart
         - name
         - image

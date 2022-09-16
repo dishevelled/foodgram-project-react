@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
 from drf_extra_fields.fields import Base64ImageField
-from ..recipes.models import Ingredient, IngredientAmount, Recipe, Tag
+from recipes.models import Ingredient, IngredientAmount, Recipe, Tag
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
-from ..users.models import Subscription
-from ..users.serializers import RegisteredUserSerializer
+from users.models import Subscription
+from users.serializers import RegisteredUserSerializer
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -46,7 +46,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         many=True,
         read_only=True,
     )
-    is_favorited = serializers.SerializerMethodField()
+    is_favorite = serializers.SerializerMethodField()
     is_in_shopping_cart = serializers.SerializerMethodField()
 
     class Meta:
@@ -56,7 +56,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             "tags",
             "author",
             "ingredients",
-            "is_favorited",
+            "is_favorite",
             "is_in_shopping_cart",
             "name",
             "image",
@@ -64,7 +64,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             "cooking_time",
         )
 
-    def get_is_favorited(self, obj):
+    def get_is_favorite(self, obj):
         user = self.context.get("request").user
         if user.is_anonymous:
             return False

@@ -47,7 +47,7 @@ const SingleCard = ({ loadItem, updateOrders }) => {
     name,
     ingredients,
     text,
-    is_favorited,
+    is_favorite,
     is_in_shopping_cart
   } = recipe
   
@@ -66,10 +66,10 @@ const SingleCard = ({ loadItem, updateOrders }) => {
               {authContext && <Button
                 modifier='style_none'
                 clickHandler={_ => {
-                  handleLike({ id, toLike: Number(!is_favorited) })
+                  handleLike({ id, toLike: Number(!is_favorite) })
                 }}
               >
-                {is_favorited ? <Icons.StarBigActiveIcon /> : <Icons.StarBigIcon />}
+                {is_favorite ? <Icons.StarBigActiveIcon /> : <Icons.StarBigIcon />}
               </Button>}
           </div>
           <TagsContainer tags={tags} />

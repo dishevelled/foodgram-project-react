@@ -106,7 +106,7 @@ class Api {
   getRecipes ({
     page = 1,
     limit = 6,
-    is_favorited = 0,
+    is_favorite = 0,
     is_in_shopping_cart = 0,
     author,
     tags
@@ -115,7 +115,7 @@ class Api {
       const authorization = token ? { 'authorization': `Token ${token}` } : {}
       const tagsString = tags ? tags.filter(tag => tag.value).map(tag => `&tags=${tag.slug}`).join('') : ''
       return fetch(
-        `/api/recipes/?page=${page}&limit=${limit}${author ? `&author=${author}` : ''}${is_favorited ? `&is_favorited=${is_favorited}` : ''}${is_in_shopping_cart ? `&is_in_shopping_cart=${is_in_shopping_cart}` : ''}${tagsString}`,
+        `/api/recipes/?page=${page}&limit=${limit}${author ? `&author=${author}` : ''}${is_favorite ? `&is_favorite=${is_favorite}` : ''}${is_in_shopping_cart ? `&is_in_shopping_cart=${is_in_shopping_cart}` : ''}${tagsString}`,
         {
           method: 'GET',
           headers: {

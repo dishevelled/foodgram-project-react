@@ -7,7 +7,7 @@ export default function useRecipe () {
   const handleLike = ({ id, toLike = 1 }) => {
     const method = toLike ? api.addToFavorites.bind(api) : api.removeFromFavorites.bind(api)
     method({ id }).then(res => {
-      const recipeUpdated = { ...recipe, is_favorited: Number(toLike) }
+      const recipeUpdated = { ...recipe, is_favorite: Number(toLike) }
       setRecipe(recipeUpdated)
     })
     .catch(err => {
