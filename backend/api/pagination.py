@@ -2,4 +2,4 @@ from rest_framework.pagination import PageNumberPagination as DRFPageNumberPagin
 
 
 class PageNumberPagination(DRFPageNumberPagination):
-    page_size_query_param = 'limit'
+    page_size_query_param = "limit"

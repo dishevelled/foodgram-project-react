@@ -8,23 +8,23 @@ class Subscription(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='follower',
-        verbose_name='Подписчик',
+        related_name="follower",
+        verbose_name="Подписчик",
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='following',
-        verbose_name='Автор',
+        related_name="following",
+        verbose_name="Автор",
     )
 
     class Meta:
-        ordering = ['-id']
-        verbose_name = 'Subscription'
-        verbose_name_plural = 'Subscriptions'
+        ordering = ["-id"]
+        verbose_name = "Subscription"
+        verbose_name_plural = "Subscriptions"
         constraints = [
             models.UniqueConstraint(
-                fields=['user', 'author'],
-                name='уникальная подписка',
+                fields=["user", "author"],
+                name="уникальная подписка",
             )
         ]
