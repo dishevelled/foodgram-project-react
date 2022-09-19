@@ -6,7 +6,7 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
@@ -65,10 +65,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.postgresql"),
+        "ENGINE": os.getenv(
+            "DB_ENGINE", default="django.db.backends.postgresql"
+        ),
         "NAME": os.getenv("DB_NAME", default="postgres"),
         "USER": os.getenv("POSTGRES_USER", default="postgres"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
+        "PASSWORD": os.getenv(
+            "POSTGRES_PASSWORD", default="postgres"
+        ),
         "HOST": os.getenv("DB_HOST", default="db"),
         "PORT": os.getenv("DB_PORT", default="5432"),
     }
@@ -89,7 +93,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
@@ -112,7 +116,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
     ),
-    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend"
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ],
@@ -124,7 +130,7 @@ DJOSER = {
     "LOGIN_FIELD": "email",
     "HIDE_USERS": False,
     "SERIALIZERS": {
-        "user_create": "users.serializers.CustomUserCreateSerializer",
+        "user_create": "users.serializers.RegisteredUserCreateSerializer",
         "user": "users.serializers.RegisteredUserSerializer",
         "current_user": "users.serializers.RegisteredUserSerializer",
     },
@@ -133,3 +139,12 @@ DJOSER = {
         "user_list": ("rest_framework.permissions.AllowAny",),
     },
 }
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://51.250.74.160/",
+    "http://localhost",
+]
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "http")

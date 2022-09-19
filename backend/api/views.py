@@ -3,16 +3,10 @@ from api.pagination import PageNumberPagination
 from api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from api.serializers import (CropRecipeSerializer, IngredientSerializer,
                              RecipeSerializer, TagSerializer)
-from recipes.models import (
-    Cart,
-    Favorite,
-    Ingredient,
-    IngredientAmount,
-    Recipe,
-    Tag)
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-
+from recipes.models import (Cart, Favorite, Ingredient, IngredientAmount,
+                            Recipe, Tag)
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas

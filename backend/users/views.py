@@ -28,15 +28,21 @@ class RegisteredUserViewSet(UserViewSet):
                 "You can't subscribe to yourself",
                 status.HTTP_400_BAD_REQUEST,
             )
-        if Subscription.objects.filter(user=user, author=author).exists():
+        if Subscription.objects.filter(
+            user=user, author=author
+        ).exists():
             return ErrorResponse(
                 "You have already subscribed to this user",
                 status.HTTP_400_BAD_REQUEST,
             )
 
         follow = Subscription.objects.create(user=user, author=author)
-        serializer = FollowSerializer(follow, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = FollowSerializer(
+            follow, context={"request": request}
+        )
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED
+        )
 
     @subscribe.mapping.delete
     def remove_subscribe(self, request, id=None):
@@ -63,8 +69,7 @@ class RegisteredUserViewSet(UserViewSet):
         user = request.user
         queryset = Subscription.objects.filter(user=user)
         pages = self.paginate_queryset(queryset)
-        serializer = FollowSerializer(pages,
-                                      many=True,
-                                      context={"request": request}
-                                      )
+        serializer = FollowSerializer(
+            pages, many=True, context={"request": request}
+        )
         return self.get_paginated_response(serializer.data)
