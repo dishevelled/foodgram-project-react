@@ -98,7 +98,8 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     {
                         "ingredients": (
-                            "Убедитесь, что значение количества" "ингредиента больше 0"
+                            ("Убедитесь, что значение количества"
+                            "ингредиента больше 0")
                         )
                     }
                 )
@@ -170,7 +171,10 @@ class FollowSerializer(serializers.ModelSerializer):
         )
 
     def get_is_subscribed(self, obj):
-        return Subscription.objects.filter(user=obj.user, author=obj.author).exists()
+        return Subscription.objects.filter(
+            user=obj.user,
+            author=obj.author
+        ).exists()
 
     def get_recipes(self, obj):
         request = self.context.get("request")
