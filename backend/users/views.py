@@ -63,5 +63,8 @@ class RegisteredUserViewSet(UserViewSet):
         user = request.user
         queryset = Subscription.objects.filter(user=user)
         pages = self.paginate_queryset(queryset)
-        serializer = FollowSerializer(pages, many=True, context={"request": request})
+        serializer = FollowSerializer(pages,
+                                      many=True,
+                                      context={"request": request}
+                                      )
         return self.get_paginated_response(serializer.data)
