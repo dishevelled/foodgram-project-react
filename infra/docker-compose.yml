@@ -2,7 +2,7 @@ version: '3.7'
 services:
 
   frontend:
-    image: dishevelled/frontend:1
+    image: dishevelled/frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
 
@@ -15,7 +15,7 @@ services:
       - ./.env
 
   backend:
-    image: dishevelled/backend:1
+    image: dishevelled/backend:latest
     restart: always
     command: >
       bash -c "python manage.py migrate &&
