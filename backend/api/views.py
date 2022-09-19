@@ -1,11 +1,11 @@
-from api.filters import IngredientSearchFilter, RecipeFilter
-from api.pagination import PageNumberPagination
-from api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
-from api.serializers import (CropRecipeSerializer, IngredientSerializer,
+from backend.api.pagination import PageNumberPagination
+from backend.api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from backend.api.serializers import (CropRecipeSerializer, IngredientSerializer,
                              RecipeSerializer, TagSerializer)
+from backend.api.filters import RecipeFilter, IngredientSearchFilter
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from recipes.models import (Cart, Favorite, Ingredient, IngredientAmount,
+from backend.recipes.models import (Cart, Favorite, Ingredient, IngredientAmount,
                             Recipe, Tag)
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -15,6 +15,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
+
 
 
 class TagsViewSet(ReadOnlyModelViewSet):
