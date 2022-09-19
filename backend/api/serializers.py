@@ -23,8 +23,8 @@ class IngredientSerializer(serializers.ModelSerializer):
 class IngredientAmountSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField(source="ingredient.id")
     name = serializers.ReadOnlyField(source="ingredient.name")
-    measurement_unit = (
-        serializers.ReadOnlyField(source="ingredient.measurement_unit")
+    measurement_unit = serializers.ReadOnlyField(
+        source="ingredient.measurement_unit"
     )
 
     class Meta:
@@ -69,25 +69,30 @@ class RecipeSerializer(serializers.ModelSerializer):
         user = self.context.get("request").user
         if user.is_anonymous:
             return False
-        return Recipe.objects.filter(id=obj.id, favorites__user=user).exists()
+        return Recipe.objects.filter(
+            id=obj.id, favorites__user=user
+        ).exists()
 
     def get_is_in_shopping_cart(self, obj):
         user = self.context.get("request").user
         if user.is_anonymous:
             return False
-        return Recipe.objects.filter(cart__user=user, id=obj.id).exists()
+        return Recipe.objects.filter(
+            cart__user=user, id=obj.id
+        ).exists()
 
     def validate(self, data):
         ingredients = self.initial_data.get("ingredients")
         if not ingredients:
             raise serializers.ValidationError(
-                {"ingredients": "Нужен хоть один ингридиент для рецепта"}
+                {
+                    "ingredients": "Нужен хоть один ингридиент для рецепта"
+                }
             )
         ingredient_list = []
         for ingredient_item in ingredients:
             ingredient = get_object_or_404(
-                Ingredient,
-                id=ingredient_item["id"]
+                Ingredient, id=ingredient_item["id"]
             )
             if ingredient in ingredient_list:
                 raise serializers.ValidationError(
@@ -97,9 +102,10 @@ class RecipeSerializer(serializers.ModelSerializer):
             if int(ingredient_item["amount"]) < 0:
                 raise serializers.ValidationError(
                     {
-                         "ingredients": (
+                        "ingredients": (
                             "Убедитесь, что значение количества"
-                            "ингредиента больше 0")
+                            "ингредиента больше 0"
+                        )
                     }
                 )
         data["ingredients"] = ingredients
@@ -112,7 +118,8 @@ class RecipeSerializer(serializers.ModelSerializer):
                 IngredientAmount(
                     recipe=recipe,
                     ingredient_id=ingredient.get("id"),
-                    amount=ingredient.get("amount"),)
+                    amount=ingredient.get("amount"),
+                )
             )
         IngredientAmount.objects.bulk_create(elements)
 
@@ -131,8 +138,8 @@ class RecipeSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.tags.clear()
         IngredientAmount.objects.filter(recipe=instance).delete()
-        self.create_tags(self.initial_data.pop("tags"), instance)
-        self.create_ingredients(validated_data.pop("ingredients"), instance)
+        self.create_tags(self.initial_data.pop('tags'), instance)
+        self.create_ingredients(validated_data.pop('ingredients'), instance)
         return super().update(instance, validated_data)
 
 
@@ -170,8 +177,7 @@ class FollowSerializer(serializers.ModelSerializer):
 
     def get_is_subscribed(self, obj):
         return Subscription.objects.filter(
-            user=obj.user,
-            author=obj.author
+            user=obj.user, author=obj.author
         ).exists()
 
     def get_recipes(self, obj):
