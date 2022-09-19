@@ -20,8 +20,8 @@ class Subscription(models.Model):
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = "Subscription"
-        verbose_name_plural = "Subscriptions"
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
         constraints = [
             models.UniqueConstraint(
                 fields=["user", "author"],

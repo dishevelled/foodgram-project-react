@@ -1,7 +1,7 @@
-from .filters import (IngredientSearchFilter, RecipeFilter)
-from .pagination import PageNumberPagination
-from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
-from .serializers import (CropRecipeSerializer, IngredientSerializer,
+from api.filters import IngredientSearchFilter, RecipeFilter
+from api.pagination import PageNumberPagination
+from api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from api.serializers import (CropRecipeSerializer, IngredientSerializer,
                              RecipeSerializer, TagSerializer)
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
