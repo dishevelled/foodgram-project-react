@@ -79,10 +79,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def download_shopping_cart(self, request):
         final_list = {}
         ingredients = IngredientAmount.objects.filter(
-            recipe__cart__user=request.user).values_list(
-                "ingredient__name",
-                "ingredient__measurement_unit",
-                "amount")
+            recipe__cart__user=request.user
+        ).values_list(
+                  "ingredient__name",
+                  "ingredient__measurement_unit",
+                  "amount")
         for item in ingredients:
             name, measurement_unit, amount = item
             if name in final_list:
@@ -94,8 +95,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 }
         response = HttpResponse(content_type="application/pdf")
         response['Content-Disposition'] = (
-                'attachment;'
-                'filename="shopping_list.pdf"')
+                   'attachment;'
+                   'filename="shopping_list.pdf"')
         self.show_page(final_list, response)
         return response
 
