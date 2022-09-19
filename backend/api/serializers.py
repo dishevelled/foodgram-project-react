@@ -98,8 +98,8 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     {
                         "ingredients": (
-                            ("Убедитесь, что значение количества"
-                            "ингредиента больше 0")
+                            "Убедитесь, что значение количества"
+                            "ингредиента больше 0"
                         )
                     }
                 )
