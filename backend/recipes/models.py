@@ -24,13 +24,17 @@ class Ingredient(models.Model):
 
 class Tag(models.Model):
 
-    name = models.CharField(unique=True, max_length=200, verbose_name="Название тэга")
+    name = models.CharField(unique=True,
+                            max_length=200,
+                            verbose_name="Название тэга")
     color = ColorField(
         unique=True,
         max_length=7,
         verbose_name="Цвет в HEX",
     )
-    slug = models.SlugField(unique=True, max_length=200, verbose_name="Уникальный слаг")
+    slug = models.SlugField(unique=True,
+                            max_length=200,
+                            verbose_name="Уникальный слаг")
 
     class Meta:
         ordering = ["-id"]
@@ -63,7 +67,8 @@ class Recipe(models.Model):
     )
     cooking_time = models.PositiveSmallIntegerField(
         validators=(
-            validators.MinValueValidator(1, message="Minimum cooking time is 1 minute"),
+            validators.MinValueValidator(1,
+                                         message="Minimum cooking time is 1 minute"),
         ),
         verbose_name="Время приготовления",
     )
@@ -148,5 +153,7 @@ class Cart(models.Model):
         verbose_name = "Корзина"
         verbose_name_plural = "В корзине"
         constraints = [
-            models.UniqueConstraint(fields=["user", "recipe"], name="unique cart user")
+            models.UniqueConstraint(fields=["user", "recipe"],
+                                    name="unique cart user"
+                                    )
         ]
