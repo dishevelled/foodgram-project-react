@@ -85,9 +85,9 @@ class RecipeSerializer(serializers.ModelSerializer):
             )
         ingredient_list = []
         for ingredient_item in ingredients:
-            ingredient = (
-                get_object_or_404
-                (Ingredient, id=ingredient_item["id"])
+            ingredient = get_object_or_404(
+                Ingredient,
+                id=ingredient_item["id"]
             )
             if ingredient in ingredient_list:
                 raise serializers.ValidationError(
@@ -97,7 +97,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             if int(ingredient_item["amount"]) < 0:
                 raise serializers.ValidationError(
                     {
-                        "ingredients": (
+                         "ingredients": (
                             "Убедитесь, что значение количества"
                             "ингредиента больше 0")
                     }
@@ -112,8 +112,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 IngredientAmount(
                     recipe=recipe,
                     ingredient_id=ingredient.get("id"),
-                    amount=ingredient.get("amount"),
-                )
+                    amount=ingredient.get("amount"),)
             )
         IngredientAmount.objects.bulk_create(elements)
 
