@@ -49,7 +49,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
     @action(
-        detail=True, methods=["get", "delete"], permission_classes=[IsAuthenticated]
+        detail=True, methods=(
+                ["get", "delete"],
+                permission_classes=[IsAuthenticated]
+        )
     )
     def favorite(self, request, pk=None):
         request.method
@@ -60,7 +63,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return None
 
     @action(
-        detail=True, methods=["get", "delete"], permission_classes=[IsAuthenticated]
+        detail=True, methods=(
+                ["get", "delete"],
+                permission_classes=[IsAuthenticated]
+        )
     )
     def shopping_cart(self, request, pk=None):
         if request.method == "GET":
@@ -69,7 +75,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return self.delete_obj(Cart, request.user, pk)
         return None
 
-    @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
+    @action(detail=False,
+            methods=["get"],
+            permission_classes=[IsAuthenticated])
     def download_shopping_cart(self, request):
         final_list = {}
         ingredients = IngredientAmount.objects.filter(
