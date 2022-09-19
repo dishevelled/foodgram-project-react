@@ -49,10 +49,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
     @action(
-        detail=True, methods=(
-                ["get", "delete"],
-                permission_classes=[IsAuthenticated]
-        )
+        detail=True,
+        methods=["get", "delete"],
+        permission_classes=[IsAuthenticated]
     )
     def favorite(self, request, pk=None):
         request.method
@@ -63,10 +62,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return None
 
     @action(
-        detail=True, methods=(
-                ["get", "delete"],
-                permission_classes=[IsAuthenticated]
-        )
+        detail=True,
+        methods=["get", "delete"],
+        permission_classes=[IsAuthenticated]
     )
     def shopping_cart(self, request, pk=None):
         if request.method == "GET":
