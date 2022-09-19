@@ -109,7 +109,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 75,
                 height,
                 f'<{index}> {name} - {data["amount"]},'
-                f'{data["measurement_unit"]}',)
+                f'{data["measurement_unit"]}',
+            )
             height -= 25
         page.showPage()
         page.save()

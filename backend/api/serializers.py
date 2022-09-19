@@ -99,8 +99,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                     {
                         "ingredients": (
                             "Убедитесь, что значение количества"
-                            "ингредиента больше 0"
-                        )
+                            "ингредиента больше 0")
                     }
                 )
         data["ingredients"] = ingredients
