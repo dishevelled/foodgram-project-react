@@ -1,3 +1,5 @@
+[![CI and CD](https://github.com/dishevelled/foodgram-project-react/actions/workflows/main.yml/badge.svg)](https://github.com/dishevelled/foodgram-project-react/actions/workflows/main.yml)
+
 # Foodgram
 
 Foodgram - это новая революционная сеть для публикации авторских рецептов.
@@ -31,3 +33,7 @@ Foodgram - это новая революционная сеть для публ
   ```
   python manage.py migrate --noinput
   ```
+Рабочая версия находится по адресу:
+http://51.250.74.160/
+
+Я.Практикум - Александр Чернышов.
