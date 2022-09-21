@@ -60,7 +60,8 @@ class Recipe(models.Model):
     )
     name = models.CharField(
         max_length=200,
-        verbose_name="Имя"
+        verbose_name="Имя",
+        unique=True
     )
     image = models.ImageField(
         upload_to="recipes/",

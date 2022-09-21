@@ -36,9 +36,9 @@ class RegisteredUserViewSet(UserViewSet):
                 status.HTTP_400_BAD_REQUEST,
             )
 
-        follow = Subscription.objects.create(user=user, author=author)
+        Subscription.objects.create(user=user, author=author)
         serializer = FollowSerializer(
-            follow, context={"request": request}
+            author, context={"request": request}
         )
         return Response(
             serializer.data, status=status.HTTP_201_CREATED
@@ -67,7 +67,7 @@ class RegisteredUserViewSet(UserViewSet):
     @action(detail=False, permission_classes=[IsAuthenticated])
     def subscriptions(self, request):
         user = request.user
-        queryset = Subscription.objects.filter(user=user)
+        queryset = User.objects.filter(follower__user=user)
         pages = self.paginate_queryset(queryset)
         serializer = FollowSerializer(
             pages, many=True, context={"request": request}

@@ -10,7 +10,7 @@ from recipes.models import (
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug", "color")
+    list_display = ("name", "color", "slug")
 
 
 class IngredientAdmin(admin.ModelAdmin):

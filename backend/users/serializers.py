@@ -36,6 +36,11 @@ class RegisteredUserCreateSerializer(UserCreateSerializer):
 
 class RegisteredUserSerializer(UserSerializer):
     is_subscribed = serializers.SerializerMethodField()
+    id = serializers.ReadOnlyField()
+    email = serializers.ReadOnlyField()
+    username = serializers.ReadOnlyField()
+    first_name = serializers.ReadOnlyField()
+    last_name = serializers.ReadOnlyField()
 
     class Meta:
         model = User
@@ -50,6 +55,7 @@ class RegisteredUserSerializer(UserSerializer):
 
     def get_is_subscribed(self, obj):
         user = self.context.get("request").user
+        return True
         if user.is_anonymous:
             return False
         return Subscription.objects.filter(
